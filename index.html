@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editorial Links</title>
+<style>
+  :root {
+    --fg: #1a1a1a;
+    --muted: #666;
+    --link: #0b5cab;
+    --link-hover: #003d82;
+    --border: #e5e5e5;
+    --bg: #ffffff;
+    --sidebar-bg: #fafafa;
+    --hl: #fff7a8;
+    --active: #eef4fb;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .layout {
+    display: flex;
+    min-height: 100vh;
+  }
+  aside {
+    width: 240px;
+    flex-shrink: 0;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    padding: 40px 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  aside .brand {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 20px;
+    letter-spacing: 0.02em;
+  }
+  aside nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  aside nav li { margin: 2px 0; }
+  aside nav a {
+    display: block;
+    padding: 8px 12px;
+    color: var(--fg);
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.92rem;
+    transition: background 0.12s;
+  }
+  aside nav a:hover { background: #f0f0f0; }
+  aside nav a.active {
+    background: var(--active);
+    color: var(--link);
+    font-weight: 500;
+  }
+  aside .nav-heading {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 24px 0 6px;
+    padding-left: 12px;
+  }
+  main {
+    flex: 1;
+    min-width: 0;
+    padding: 48px 56px 80px;
+  }
+  .content {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin-bottom: 28px;
+  }
+  h1 {
+    margin: 0 0 4px;
+    font-size: 1.7rem;
+    font-weight: 600;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  #search {
+    width: 100%;
+    margin: 20px 0 8px;
+    padding: 10px 14px;
+    font-size: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  #search:focus { border-color: var(--link); }
+  .hint {
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-bottom: 24px;
+  }
+  h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 32px 0 10px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  ul.links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul.links li {
+    padding: 7px 0;
+    border-bottom: 1px solid #f2f2f2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    align-items: baseline;
+  }
+  ul.links li:last-child { border-bottom: none; }
+  .label {
+    flex: 0 0 320px;
+    color: var(--fg);
+    font-weight: 500;
+  }
+  ul.links a {
+    color: var(--link);
+    text-decoration: none;
+    word-break: break-all;
+    flex: 1;
+    min-width: 0;
+  }
+  ul.links a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+  }
+  mark {
+    background: var(--hl);
+    color: inherit;
+    padding: 0 1px;
+  }
+  .hidden { display: none !important; }
+  .empty {
+    color: var(--muted);
+    font-style: italic;
+    padding: 12px 0;
+  }
+  kbd {
+    background: #f4f4f4;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 0.75rem;
+    font-family: inherit;
+  }
+
+  /* Hamburger for mobile */
+  .menu-toggle {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 20;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 860px) {
+    .menu-toggle { display: block; }
+    aside {
+      position: fixed;
+      z-index: 15;
+      transform: translateX(-100%);
+      transition: transform 0.2s;
+      box-shadow: 2px 0 12px rgba(0,0,0,0.05);
+    }
+    aside.open { transform: translateX(0); }
+    main { padding: 64px 24px 60px; }
+    .label { flex: 0 0 100%; margin-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">&#9776;</button>
+
+<div class="layout">
+  <aside id="sidebar">
+    <div class="brand">My Quick Links</div>
+    <nav>
+      <div class="nav-heading">Pages</div>
+      <ul>
+        <li><a href="index.html" class="active">Editorial links</a></li>
+        <!-- Add more pages later, e.g.:
+        <li><a href="datasets.html">Datasets</a></li>
+        <li><a href="tools.html">Tools</a></li>
+        -->
+      </ul>
+    </nav>
+  </aside>
+
+  <main>
+    <div class="content">
+      <header>
+        <h1>Editorial Links</h1>
+        <div class="subtitle">Personal shortcuts for editorial / reviewing work</div>
+        <input id="search" type="text" placeholder="Type to filter (e.g. IJGIS, springer, elsevier)..." autocomplete="off">
+        <div class="hint">Tip: press <kbd>/</kbd> to jump to search, <kbd>Esc</kbd> to clear.</div>
+      </header>
+
+      <section data-section>
+        <h2>Submissions</h2>
+        <ul class="links">
+          <li><span class="label">IJGIS &amp; GRS</span><a href="https://rp.tandfonline.com/submission/create?journalCode=tgrs" target="_blank" rel="noopener">https://rp.tandfonline.com/submission/create?journalCode=tgrs</a></li>
+        </ul>
+      </section>
+
+      <section data-section>
+        <h2>Editor links</h2>
+        <ul class="links">
+          <li><span class="label">IJGIS</span><a href="https://mc.manuscriptcentral.com/ijgis" target="_blank" rel="noopener">https://mc.manuscriptcentral.com/ijgis</a></li>
+          <li><span class="label">GIScience &amp; Remote Sensing</span><a href="https://mc.manuscriptcentral.com/gisrs" target="_blank" rel="noopener">https://mc.manuscriptcentral.com/gisrs</a></li>
+          <li><span class="label">JAG</span><a href="https://www2.cloud.editorialmanager.com/jag/default2.aspx" target="_blank" rel="noopener">https://www2.cloud.editorialmanager.com/jag</a></li>
+          <li><span class="label">Geomatica</span><a href="https://www.editorialmanager.com/geomat/" target="_blank" rel="noopener">https://www.editorialmanager.com/geomat/</a></li>
+          <li><span class="label">Journal of Spatial Science</span><a href="https://mc.manuscriptcentral.com/tjss" target="_blank" rel="noopener">https://mc.manuscriptcentral.com/tjss</a></li>
+          <li><span class="label">All Earth</span><a href="https://mc.manuscriptcentral.com/tgda" target="_blank" rel="noopener">https://mc.manuscriptcentral.com/tgda</a></li>
+          <li><span class="label">Geoscience Methods Development</span><a href="https://editor.copernicus.org/EGUsphere" target="_blank" rel="noopener">https://editor.copernicus.org/EGUsphere</a></li>
+          <li><span class="label">Humanities and Social Sciences Communications</span><a href="https://editorial.springernature.com/tasks" target="_blank" rel="noopener">https://editorial.springernature.com/tasks</a></li>
+          <li><span class="label">Annals of GIS</span><a href="https://mc.manuscriptcentral.com/tagi" target="_blank" rel="noopener">https://mc.manuscriptcentral.com/tagi</a></li>
+          <li><span class="label">Resources, Conservation &amp; Recycling</span><a href="https://www.editorialmanager.com/recycl/" target="_blank" rel="noopener">https://www.editorialmanager.com/recycl/</a></li>
+          <li><span class="label">International Journal of Digital Earth</span><a href="https://mc.manuscriptcentral.com/ijde" target="_blank" rel="noopener">https://mc.manuscriptcentral.com/ijde</a></li>
+          <li><span class="label">Geo-spatial Information Science</span><a href="https://mc.manuscriptcentral.com/tgsi" target="_blank" rel="noopener">https://mc.manuscriptcentral.com/tgsi</a></li>
+          <li><span class="label">Construction Innovation: Information, Process, Management</span><a href="https://mc.manuscriptcentral.com/ciipm" target="_blank" rel="noopener">https://mc.manuscriptcentral.com/ciipm</a></li>
+          <li><span class="label">Big Earth Data</span><a href="https://www.editorialmanager.com/tbed/" target="_blank" rel="noopener">https://www.editorialmanager.com/tbed/</a></li>
+        </ul>
+      </section>
+
+      <section data-section>
+        <h2>CAUL Free OA Journals</h2>
+        <ul class="links">
+          <li><span class="label">CAUL publishers &amp; agreements</span><a href="https://caul.libguides.com/c.php?g=941498&amp;p=6864211" target="_blank" rel="noopener">CAUL website</a></li>
+          <li><span class="label">Elsevier (selected journals)</span><a href="https://agreements.journals.elsevier.com/caul-consortium" target="_blank" rel="noopener">Search Elsevier</a></li>
+          <li><span class="label">Taylor &amp; Francis (selected journals)</span><a href="https://www.tandfonline.com/openaccess/openselect" target="_blank" rel="noopener">Search T&amp;F</a></li>
+          <li><span class="label">Springer Nature (selected journals)</span><a href="https://www.springernature.com/gp/open-research/oa-agreements/anz" target="_blank" rel="noopener">Search Springer Nature</a></li>
+        </ul>
+      </section>
+
+      <div id="empty" class="empty hidden">No matches.</div>
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  const input = document.getElementById('search');
+  const sections = document.querySelectorAll('[data-section]');
+  const empty = document.getElementById('empty');
+  const sidebar = document.getElementById('sidebar');
+  const menuToggle = document.getElementById('menuToggle');
+
+  menuToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+
+  const items = [];
+  sections.forEach(sec => {
+    sec.querySelectorAll('li').forEach(li => {
+      items.push({
+        el: li,
+        text: li.textContent.toLowerCase(),
+        originalHTML: li.innerHTML
+      });
+    });
+  });
+
+  function escapeRegex(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function highlight(el, originalHTML, query) {
+    if (!query) { el.innerHTML = originalHTML; return; }
+    const re = new RegExp('(' + escapeRegex(query) + ')', 'gi');
+    const tmp = document.createElement('div');
+    tmp.innerHTML = originalHTML;
+    const walker = document.createTreeWalker(tmp, NodeFilter.SHOW_TEXT, null);
+    const toReplace = [];
+    let node;
+    while ((node = walker.nextNode())) {
+      if (re.test(node.nodeValue)) toReplace.push(node);
+      re.lastIndex = 0;
+    }
+    toReplace.forEach(n => {
+      const span = document.createElement('span');
+      span.innerHTML = n.nodeValue.replace(re, '<mark>$1</mark>');
+      n.parentNode.replaceChild(span, n);
+    });
+    el.innerHTML = tmp.innerHTML;
+  }
+
+  function filter() {
+    const q = input.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    items.forEach(item => {
+      const match = !q || item.text.indexOf(q) !== -1;
+      item.el.classList.toggle('hidden', !match);
+      if (match) {
+        visibleCount++;
+        highlight(item.el, item.originalHTML, q);
+      } else {
+        item.el.innerHTML = item.originalHTML;
+      }
+    });
+
+    sections.forEach(sec => {
+      const anyVisible = sec.querySelectorAll('li:not(.hidden)').length > 0;
+      sec.classList.toggle('hidden', !anyVisible);
+    });
+
+    empty.classList.toggle('hidden', visibleCount !== 0);
+  }
+
+  input.addEventListener('input', filter);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === '/' && document.activeElement !== input) {
+      e.preventDefault();
+      input.focus();
+      input.select();
+    }
+    if (e.key === 'Escape' && document.activeElement === input) {
+      input.value = '';
+      filter();
+      input.blur();
+    }
+  });
+})();
+</script>
+</body>
+</html>

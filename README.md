@@ -1,1 +1,1 @@
-my-hub
+myhub
